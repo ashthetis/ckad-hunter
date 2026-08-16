@@ -163,6 +163,7 @@ function defaultData() {
   Object.keys(STATS).forEach(k => stats[k] = { xp: 0 });
   return {
     hunterName: "Ash",
+    theme: "dark",
     createdAt: new Date().toISOString(),
     stats,
     quests: JSON.parse(JSON.stringify(DEFAULT_QUESTS)).map(q => ({ ...q, done: false })),
@@ -213,6 +214,7 @@ function saveData() {
 }
 
 let state = loadData();
+document.documentElement.dataset.theme = state.theme === "light" ? "light" : "dark";
 
 /* ===================== LEVELING ===================== */
 
@@ -905,6 +907,21 @@ document.getElementById("hunterName").addEventListener("change", (e) => {
   state.hunterName = e.target.value.trim() || "Hunter";
   saveData();
 });
+
+/* ===================== THEME ===================== */
+
+function updateThemeToggleIcon() {
+  const btn = document.getElementById("themeToggle");
+  btn.textContent = state.theme === "light" ? "☀️" : "🌙";
+  btn.title = state.theme === "light" ? "Switch to dark theme" : "Switch to light theme";
+}
+document.getElementById("themeToggle").addEventListener("click", () => {
+  state.theme = state.theme === "light" ? "dark" : "light";
+  document.documentElement.dataset.theme = state.theme;
+  updateThemeToggleIcon();
+  saveData();
+});
+updateThemeToggleIcon();
 
 /* ===================== EXPORT / IMPORT / RESET ===================== */
 
