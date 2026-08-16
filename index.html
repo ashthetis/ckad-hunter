@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hunter Log — CKAD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="bg-grid"></div>
+
+<div class="app">
+
+  <!-- STATUS WINDOW -->
+  <header class="status-window">
+    <div class="status-window__top">
+      <div class="status-window__title">STATUS</div>
+      <div class="rank-badge" id="rankBadge" data-rank="E">E</div>
+    </div>
+
+    <div class="status-window__body">
+      <div class="hunter-id">
+        <input id="hunterName" class="hunter-name-input" value="Ash" spellcheck="false" maxlength="20" title="Click to rename">
+        <div class="hunter-sub">CKAD Hunter · click name to edit</div>
+      </div>
+
+      <div class="level-block">
+        <div class="level-block__num">
+          <span class="level-label">LV</span>
+          <span id="levelNum">1</span>
+        </div>
+        <div class="xp-bar">
+          <div class="xp-bar__fill" id="xpFill"></div>
+        </div>
+        <div class="xp-bar__label"><span id="xpText">0 / 100 XP</span></div>
+      </div>
+
+      <div class="streak-block">
+        <div class="streak-flame" id="streakFlame">🔥</div>
+        <div>
+          <div class="streak-num" id="streakNum">0</div>
+          <div class="streak-label">day streak</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- STATS -->
+  <section class="panel">
+    <h2 class="panel__title">Hunter Stats</h2>
+    <div id="statsGrid" class="stats-grid"></div>
+  </section>
+
+  <!-- STUDY CALENDAR -->
+  <section class="panel">
+    <h2 class="panel__title">5-Week Study Plan</h2>
+    <div id="calendarGrid" class="calendar"></div>
+  </section>
+
+  <div class="two-col">
+    <!-- QUEST LOG -->
+    <section class="panel">
+      <div class="panel__header">
+        <h2 class="panel__title">Quest Log</h2>
+        <button class="btn btn--ghost" id="addQuestBtn">+ Side Quest</button>
+      </div>
+      <div id="questWeeks" class="quest-weeks"></div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="panel">
+      <div class="panel__header">
+        <h2 class="panel__title">Projects &amp; Trials</h2>
+        <button class="btn btn--ghost" id="addProjectBtn">+ Project</button>
+      </div>
+      <div id="projectsList" class="projects-list"></div>
+    </section>
+  </div>
+
+  <!-- ACTIVITY -->
+  <section class="panel">
+    <h2 class="panel__title">Activity</h2>
+    <div id="heatmap" class="heatmap"></div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__left">Progress saved locally in this browser.</div>
+    <div class="footer__right">
+      <button class="btn btn--ghost btn--sm" id="exportBtn">Export</button>
+      <button class="btn btn--ghost btn--sm" id="importBtn">Import</button>
+      <input type="file" id="importFile" accept="application/json" hidden>
+      <button class="btn btn--danger btn--sm" id="resetBtn">Reset</button>
+    </div>
+  </footer>
+
+</div>
+
+<!-- LEVEL UP MODAL -->
+<div class="levelup" id="levelupModal">
+  <div class="levelup__card">
+    <div class="levelup__glow"></div>
+    <div class="levelup__title">LEVEL UP</div>
+    <div class="levelup__detail" id="levelupDetail"></div>
+    <button class="btn" id="levelupClose">Continue</button>
+  </div>
+</div>
+
+<!-- ADD QUEST MODAL -->
+<div class="modal" id="questModal">
+  <div class="modal__card">
+    <h3>New Side Quest</h3>
+    <label>Title<input type="text" id="qTitle" placeholder="e.g. Re-do domain 4 exercises"></label>
+    <label>Stat<select id="qStat"></select></label>
+    <label>XP Reward<input type="number" id="qXP" value="50" min="10" max="500"></label>
+    <div class="modal__actions">
+      <button class="btn btn--ghost" id="qCancel">Cancel</button>
+      <button class="btn" id="qSave">Add Quest</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD PROJECT MODAL -->
+<div class="modal" id="projectModal">
+  <div class="modal__card">
+    <h3>New Project</h3>
+    <label>Title<input type="text" id="pTitle" placeholder="e.g. Build a 3-tier app on k8s"></label>
+    <label>XP Reward on completion<input type="number" id="pXP" value="200" min="10" max="2000"></label>
+    <div class="modal__actions">
+      <button class="btn btn--ghost" id="pCancel">Cancel</button>
+      <button class="btn" id="pSave">Add Project</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
