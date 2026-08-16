@@ -623,6 +623,44 @@ const WEEK_STUDY_LINKS = {
   ],
 };
 
+// Video walkthroughs, mostly pulled from Piyush Garg's "40 Days of Kubernetes" YouTube series
+// (channel: Tech Tutorials with Piyush) — it's built for the CKA exam, not CKAD, but the
+// underlying Kubernetes concepts it covers overlap heavily with what's on the CKAD too.
+// One video (the canary/blue-green one in Week 3) is from a different channel since that
+// specific topic isn't covered as a dedicated video in that playlist.
+const WEEK_VIDEO_LINKS = {
+  "Week 1": [
+    { title: "ConfigMaps & Secrets", url: "https://www.youtube.com/watch?v=Q9fHJLSyd7Q" },
+    { title: "Requests & Limits", url: "https://www.youtube.com/watch?v=Q-mk6EZVX_Q" },
+    { title: "Security Context & Capabilities", url: "https://www.youtube.com/watch?v=2sk97jCQcP4" },
+    { title: "RBAC Explained", url: "https://www.youtube.com/watch?v=uGcDt7iNFkE" },
+    { title: "Service Accounts", url: "https://www.youtube.com/watch?v=k2iCq7IlMKM" },
+  ],
+  "Week 2": [
+    { title: "Pods Explained", url: "https://www.youtube.com/watch?v=_f9ql2Y5Xcc" },
+    { title: "Sidecar vs Init Container", url: "https://www.youtube.com/watch?v=yRiFq1ykBxc" },
+    { title: "DaemonSet, Job & CronJob", url: "https://www.youtube.com/watch?v=kvITrySpy_k" },
+    { title: "Volumes, PV/PVC & StorageClass", url: "https://www.youtube.com/watch?v=2NzYX8_lX_0" },
+  ],
+  "Week 3": [
+    { title: "Deployments, RC & ReplicaSet", url: "https://www.youtube.com/watch?v=oe2zjRb51F0" },
+    { title: "Canary / Blue-Green / Rolling demo", url: "https://www.youtube.com/watch?v=0QhUhrWGB9k" },
+    { title: "Helm Charts", url: "https://www.youtube.com/watch?v=k4vhgeTAOn0" },
+    { title: "Kustomize", url: "https://www.youtube.com/watch?v=Od4BROWS3M0" },
+  ],
+  "Week 4": [
+    { title: "Services Explained", url: "https://www.youtube.com/watch?v=tHAQWLKMTB0" },
+    { title: "Ingress Tutorial", url: "https://www.youtube.com/watch?v=kf3UjITS91M" },
+    { title: "Network Policies", url: "https://www.youtube.com/watch?v=eVtnevr3Rao" },
+    { title: "Liveness vs Readiness Probes", url: "https://www.youtube.com/watch?v=x2e6pIBLKzw" },
+    { title: "App Failure Troubleshooting", url: "https://www.youtube.com/watch?v=Mil0HUtPg6I" },
+  ],
+  "Week 5": [
+    { title: "Advanced kubectl / JSONPath", url: "https://www.youtube.com/watch?v=l9_UDSaiFj4" },
+    { title: "Exam-day tips (CKA, but mechanics transfer)", url: "https://www.youtube.com/watch?v=QxGy719Xotc" },
+  ],
+};
+
 function renderQuests() {
   const container = document.getElementById("questWeeks");
   container.innerHTML = "";
@@ -634,11 +672,22 @@ function renderQuests() {
     container.appendChild(label);
 
     const links = WEEK_STUDY_LINKS[week];
-    if (links && links.length) {
+    const videos = WEEK_VIDEO_LINKS[week];
+    if ((links && links.length) || (videos && videos.length)) {
       const box = document.createElement("div");
       box.className = "study-links";
-      box.innerHTML = `<span class="study-links__label">Study first:</span> ` +
-        links.map(l => `<a href="${l.url}" target="_blank" rel="noopener">${escapeHtml(l.title)}</a>`).join(`<span class="study-links__sep">·</span>`);
+      let html = "";
+      if (links && links.length) {
+        html += `<div class="study-links__row"><span class="study-links__label">📖 Read first:</span> ` +
+          links.map(l => `<a href="${l.url}" target="_blank" rel="noopener">${escapeHtml(l.title)}</a>`).join(`<span class="study-links__sep">·</span>`) +
+          `</div>`;
+      }
+      if (videos && videos.length) {
+        html += `<div class="study-links__row"><span class="study-links__label">▶ Watch first:</span> ` +
+          videos.map(l => `<a href="${l.url}" target="_blank" rel="noopener">${escapeHtml(l.title)}</a>`).join(`<span class="study-links__sep">·</span>`) +
+          `</div>`;
+      }
+      box.innerHTML = html;
       container.appendChild(box);
     }
 

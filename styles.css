@@ -511,6 +511,7 @@ html, body {
   padding: 8px 10px;
   margin-bottom: 8px;
 }
+.study-links__row + .study-links__row { margin-top: 4px; }
 .study-links__label { color: var(--text-dim); font-weight: 600; margin-right: 2px; }
 .study-links a { color: var(--accent); text-decoration: none; }
 .study-links a:hover { text-decoration: underline; }
