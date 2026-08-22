@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1220"/>
+      <stop offset="100%" stop-color="#171e33"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="42%" r="55%">
+      <stop offset="0%" stop-color="#5b7fff" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#5b7fff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6c8bff"/>
+      <stop offset="100%" stop-color="#7c5cff"/>
+    </linearGradient>
+    <linearGradient id="bladeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#c9d2f0"/>
+      <stop offset="50%" stop-color="#f4f6fb"/>
+      <stop offset="100%" stop-color="#aab6e8"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffcf7a"/>
+      <stop offset="100%" stop-color="#c9860f"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background -->
+  <rect x="0" y="0" width="512" height="512" rx="112" fill="url(#bgGrad)"/>
+  <circle cx="256" cy="215" r="230" fill="url(#glow)"/>
+
+  <!-- shield -->
+  <path d="M256,88 L382,138 L382,270 C382,364 256,436 256,436 C256,436 130,364 130,270 L130,138 Z"
+        fill="url(#shieldGrad)" stroke="#1f2740" stroke-width="6"/>
+  <path d="M256,88 L382,138 L382,270 C382,364 256,436 256,436 C256,436 130,364 130,270 L130,138 Z"
+        fill="none" stroke="#a9bbff" stroke-opacity="0.5" stroke-width="3"/>
+
+  <!-- sword -->
+  <g>
+    <polygon points="256,150 276,300 236,300" fill="url(#bladeGrad)"/>
+    <line x1="256" y1="160" x2="256" y2="292" stroke="#7f8bc9" stroke-width="3" stroke-opacity="0.6"/>
+    <rect x="220" y="296" width="72" height="16" rx="6" fill="url(#goldGrad)" stroke="#8a5a12" stroke-width="2"/>
+    <rect x="242" y="312" width="28" height="56" rx="8" fill="#2c1f14" stroke="#1a120b" stroke-width="2"/>
+    <circle cx="256" cy="378" r="16" fill="url(#goldGrad)" stroke="#8a5a12" stroke-width="2"/>
+  </g>
+</svg>
